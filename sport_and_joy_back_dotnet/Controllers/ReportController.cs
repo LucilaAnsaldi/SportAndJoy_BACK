@@ -110,7 +110,7 @@ namespace sport_and_joy_back_dotnet.Controllers
             }
         }
 
-            [HttpGet("reservations-in-month/{month}")]
+            [HttpGet("reservations-in-month/{month}/{year}")]
             public IActionResult ReservationsInMonthReport(int month, int year)
             {
 

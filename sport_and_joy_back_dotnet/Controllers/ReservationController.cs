@@ -148,7 +148,7 @@ namespace sport_and_joy_back_dotnet.Controllers
                     FieldId = dto.FieldId,
                 };
                 _reservationRepository.CreateRes(reservation);
-                return Ok();
+                return Created("Created", dto);
             }
             catch(Exception ex)
             {
