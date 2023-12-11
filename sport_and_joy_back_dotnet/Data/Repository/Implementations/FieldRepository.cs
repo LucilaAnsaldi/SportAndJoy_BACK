@@ -67,6 +67,7 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
                 LockerRoom = dto.LockerRoom,
                 Bar = dto.Bar,
                 Sport = dto.Sport,
+                Price = dto.Price,
             };
             _context.Fields.Add(field);
             _context.SaveChanges();
@@ -90,6 +91,7 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
                 field.LockerRoom = dto.LockerRoom;
                 field.Bar = dto.Bar;
                 field.Sport = dto.Sport;
+                field.Price = dto.Price;
 
                 _context.SaveChanges();
             }
@@ -110,6 +112,8 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
                 field.LockerRoom = dto.LockerRoom;
                 field.Bar = dto.Bar;
                 field.Sport = dto.Sport;
+                field.Price = dto.Price;
+
 
                 _context.SaveChanges();
             }
