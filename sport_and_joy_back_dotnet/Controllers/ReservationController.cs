@@ -131,7 +131,7 @@ namespace sport_and_joy_back_dotnet.Controllers
         [HttpPost("create-admin")] //crea reserva ASOCIADA AL ID DE UN USUARIO QUE EL ADMIN PROPORCIONE
         [Authorize(Roles = "ADMIN")]
 
-        public IActionResult CreateReservationAdmin([FromBody] ReservationForCreationDTO dto, int IdUser)
+        public IActionResult CreateReservationAdmin([FromBody] ReservationForCreationDTO dto)
         {
             try
             {
@@ -139,10 +139,12 @@ namespace sport_and_joy_back_dotnet.Controllers
                 {
                     return BadRequest();
                 }
+
+
                 var reservation = new Reservation
                 {
                     Date = dto.Date,
-                    UserId = IdUser, //id proporcionado x el admin
+                    UserId = dto.UserId, //id proporcionado x el admin
                     FieldId = dto.FieldId,
                 };
                 _reservationRepository.CreateRes(reservation);
