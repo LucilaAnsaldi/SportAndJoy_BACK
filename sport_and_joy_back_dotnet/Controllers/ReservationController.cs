@@ -4,6 +4,7 @@ using sport_and_joy_back_dotnet.Entities;
 using sport_and_joy_back_dotnet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace sport_and_joy_back_dotnet.Controllers
 {
@@ -148,7 +149,10 @@ namespace sport_and_joy_back_dotnet.Controllers
                     FieldId = dto.FieldId,
                 };
                 _reservationRepository.CreateRes(reservation);
-                return Created("Created", dto);
+
+                var createdReservation = _reservationRepository.GetResById(reservation.Id);
+
+                return Created("Created", createdReservation);
             }
             catch(Exception ex)
             {
