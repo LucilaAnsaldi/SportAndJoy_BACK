@@ -66,7 +66,10 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
                 userItem.FirstName = user.FirstName;
                 userItem.Email = user.Email;
                 userItem.LastName = user.LastName;
-                userItem.Password = user.Password;
+                if (user.Password != null)
+                {
+                    userItem.Password = user.Password;
+                }
                 userItem.Role = user.Role;
 
                 _context.SaveChanges();
