@@ -11,6 +11,7 @@ namespace sport_and_joy_back_dotnet.Models
         public string? LastName { get; set; }
 
         public string? Email { get; set; }
+        public string? Password { get; set; }
 
         public Erole Role { get; set; }
 

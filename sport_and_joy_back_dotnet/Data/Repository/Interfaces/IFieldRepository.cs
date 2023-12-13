@@ -15,12 +15,12 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Interfaces
 
         // este post se comenta porque quedamos que un owner no puede crear una cancha.
         //public void CreateFie(FieldForCreationDTO dto, int userId);
-        public void CreateFieAdmin(FieldForCreationDTO dto, int IdUser);
+        public Field CreateFieAdmin(FieldForCreationDTO dto, int IdUser);
 
 
         //////// PUT ////////
         public void UpdateFie(FieldDTO dto, int userId, int id);
-        public void UpdateFieAdmin(FieldDTO dto, int IdUser, int id);
+        public void UpdateFieAdmin(FieldDTO dto, int id);
 
 
         //////// DELETE ////////

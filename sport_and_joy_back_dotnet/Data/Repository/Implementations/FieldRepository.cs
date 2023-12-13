@@ -55,23 +55,29 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
         //    _context.SaveChanges();
         //}
 
-        public void CreateFieAdmin(FieldForCreationDTO dto, int IdUser)
+        public Field CreateFieAdmin(FieldForCreationDTO dto, int IdUser)
         {
-            Field field = new Field()
-            {
-                UserId = IdUser,
-                Name = dto.Name,
-                Image = dto.Image,
-                Location = dto.Location,
-                Description = dto.Description,
-                LockerRoom = dto.LockerRoom,
-                Bar = dto.Bar,
-                Sport = dto.Sport,
-                Price = dto.Price,
-            };
-            _context.Fields.Add(field);
-            _context.SaveChanges();
+            
+                Field field = new Field()
+                {
+                    UserId = IdUser,
+                    Name = dto.Name,
+                    Image = dto.Image,
+                    Location = dto.Location,
+                    Description = dto.Description,
+                    LockerRoom = dto.LockerRoom,
+                    Bar = dto.Bar,
+                    Sport = dto.Sport,
+                    Price = dto.Price,
+                };
+
+                _context.Fields.Add(field);
+                _context.SaveChanges();
+
+                return field;
+            
         }
+
 
 
 
@@ -97,13 +103,12 @@ namespace sport_and_joy_back_dotnet.Data.Repository.Implementations
             }
         }
 
-        public void UpdateFieAdmin(FieldDTO dto, int IdUser, int id)
+        public void UpdateFieAdmin(FieldDTO dto, int id)
         {
-            var field = _context.Fields.FirstOrDefault(f => f.UserId == IdUser && f.Id == id);
+            var field = _context.Fields.FirstOrDefault(f => f.Id == id);
 
             if (field != null)
             {
-                field.UserId = IdUser;
                 field.Id = id;
                 field.Name = dto.Name;
                 field.Image = dto.Image;

@@ -198,6 +198,7 @@ namespace sport_and_joy_back_dotnet.Controllers
                     FirstName = dto.FirstName,
                     LastName = dto.LastName,
                     Email = dto.Email,
+                    Password = dto.Password,
                     Role = userRoleEnum,
                 };
                 if (idUserLoggedIn != userSesionId)

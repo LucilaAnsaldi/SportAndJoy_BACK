@@ -12,6 +12,7 @@ namespace sport_and_joy_back_dotnet.Models
         public bool? LockerRoom { get; set; }
         public bool? Bar { get; set; }
         public float? Price { get; set; }
+        public int ? UserId { get; set; }
 
         public Esport Sport { get; set; }   
     }

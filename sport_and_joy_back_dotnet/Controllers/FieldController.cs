@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using sport_and_joy_back_dotnet.Data.Repository.Implementations;
 using sport_and_joy_back_dotnet.Data.Repository.Interfaces;
 using sport_and_joy_back_dotnet.Entities;
 using sport_and_joy_back_dotnet.Models;
@@ -75,7 +76,7 @@ namespace sport_and_joy_back_dotnet.Controllers
 
 
         //////// POST ////////
-        
+
         // este post se comenta porque quedamos que un owner no puede crear una cancha.
 
         //[HttpPost("create")] //crear nueva cancha asociada a un usuario
@@ -96,21 +97,34 @@ namespace sport_and_joy_back_dotnet.Controllers
         //    return Created("Created", dto);
         //}
 
-        [HttpPost("create-admin")] //crear nueva cancha con userId que le pasa el admin
+        [HttpPost("create-admin")]
         [Authorize(Roles = "ADMIN")]
-
-        public IActionResult CreateFieldAdmin(FieldForCreationDTO dto, int IdUser) //el admin le pasa como parámetro el id del usuario dueño de la cancha
+        public IActionResult CreateFieldAdmin(FieldForCreationDTO dto, int IdUser)
         {
             try
             {
-                _fieldRepository.CreateFieAdmin(dto, IdUser);
-                return Created("Created", dto);
+                if (dto == null)
+                {
+                    return BadRequest();
+                }
+
+                Field createdField = _fieldRepository.CreateFieAdmin(dto, IdUser);
+
+                if (createdField != null)
+                {
+                    return Created("Created", createdField);
+                }
+                else
+                {
+                    return BadRequest("No se pudo crear el campo.");
+                }
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
 
 
         //////// PUT ////////
@@ -135,17 +149,23 @@ namespace sport_and_joy_back_dotnet.Controllers
         [HttpPut("{id}/edit-admin")] //editar una cancha en específico por id de un usuario que el admin pasa.
         [Authorize(Roles = "ADMIN")]
 
-        public IActionResult UpdateFieldAdmin(FieldDTO dto, int IdUser, int id)
+        public IActionResult UpdateFieldAdmin(FieldDTO dto, int id)
         {
             try
             {
-                _fieldRepository.UpdateFieAdmin(dto, IdUser, id);
-                return NoContent();
+                _fieldRepository.UpdateFieAdmin(dto, id);
+
+                var fieldModified = _fieldRepository.GetFieById(id);
+
+                return Created("Created", fieldModified);
+
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
+
+
         }
 
 
